@@ -1,43 +1,99 @@
-import DreamForm from '../components/DreamForm';
-import HoroscopeGrid from '../components/HoroscopeGrid';
+'use client';
+import { useState } from 'react';
 
 export default function Home() {
+  const [dream, setDream] = useState('');
+  
+  const zodiacs = [
+    { name: 'Capricorn', thai: 'ราศีมังกร', date: '15 ม.ค. - 12 ก.พ.', icon: '♑' },
+    { name: 'Aquarius', thai: 'ราศีกุมภ์', date: '13 ก.พ. - 14 มี.ค.', icon: '♒' },
+    { name: 'Pisces', thai: 'ราศีมีน', date: '15 มี.ค. - 12 เม.ย.', icon: '♓' },
+    { name: 'Aries', thai: 'ราศีเมษ', date: '13 เม.ย. - 14 พ.ค.', icon: '♈' },
+    { name: 'Taurus', thai: 'ราศีพฤษภ', date: '15 พ.ค. - 14 มิ.ย.', icon: '♉' },
+    { name: 'Gemini', thai: 'ราศีเมถุน', date: '15 มิ.ย. - 14 ก.ค.', icon: '♊' },
+    { name: 'Cancer', thai: 'ราศีกรกฎ', date: '15 ก.ค. - 15 ส.ค.', icon: '♋' },
+    { name: 'Leo', thai: 'ราศีสิงห์', date: '16 ส.ค. - 16 ก.ย.', icon: '♌' },
+    { name: 'Virgo', thai: 'ราศีกันย์', date: '17 ก.ย. - 16 ต.ค.', icon: '♍' },
+    { name: 'Libra', thai: 'ราศีตุลย์', date: '17 ต.ค. - 15 พ.ย.', icon: '♎' },
+    { name: 'Scorpio', thai: 'ราศีพิจิก', date: '16 พ.ย. - 15 ธ.ค.', icon: '♏' },
+    { name: 'Sagittarius', thai: 'ราศีธนู', date: '16 ธ.ค. - 14 ม.ค.', icon: '♐' },
+  ];
+
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start pt-8 pb-12 px-4 gap-12 overflow-x-hidden">
+    <main className="min-h-screen p-4 md:p-8 max-w-lg mx-auto relative overflow-hidden">
       
-      {/* HEADER & HERO */}
-      <header className="text-center space-y-2 z-10">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-mystic-gold to-yellow-200 drop-shadow-lg">
+      {/* Background Glow Effects */}
+      <div className="fixed top-0 left-0 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow"></div>
+      <div className="fixed bottom-0 right-0 w-64 h-64 bg-gold-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow"></div>
+
+      {/* Header Section */}
+      <header className="text-center mb-10 relative z-10">
+        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gold-400 to-white drop-shadow-sm mb-2">
           SiamLuckyAI
         </h1>
-        <p className="text-purple-200 text-lg md:text-xl">
+        <p className="text-gray-300 font-light text-sm md:text-base tracking-wide">
           ทำนายฝัน & ดูดวง แม่นยำที่สุดด้วย AI
+          <br/>
+          <span className="text-gold-500 text-xs">(Premium Fortune & Lotto Predictions)</span>
         </p>
       </header>
 
-      {/* TOP AD PLACEHOLDER */}
-      <div className="w-full max-w-md h-[100px] bg-gray-800/50 border border-gray-700 rounded-lg flex items-center justify-center text-gray-500 text-sm">
-        [Ad Banner Space - Top]
+      {/* Ad Space (Placeholder for Monitag) */}
+      <div className="w-full h-16 bg-black/30 border border-white/5 rounded-lg mb-8 flex items-center justify-center text-xs text-gray-500 uppercase tracking-widest">
+        [ Premium Ad Space ]
       </div>
 
-      {/* FEATURE 1: DREAM INTERPRETER (MONEY TRAP) */}
-      <section className="w-full z-10">
-        <DreamForm />
-      </section>
-
-      {/* FEATURE 2: HOROSCOPE GRID */}
-      <section className="w-full z-10">
-        <HoroscopeGrid />
-      </section>
-
-      {/* BOTTOM AD PLACEHOLDER */}
-      <div className="w-full max-w-md h-[250px] bg-gray-800/50 border border-gray-700 rounded-lg flex items-center justify-center text-gray-500 text-sm">
-        [Ad Banner Space - Bottom]
+      {/* Dream Analysis Card */}
+      <div className="glass-card rounded-2xl p-6 mb-10 relative z-10 group">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-2xl animate-float">🔮</span>
+          <h2 className="text-xl font-semibold text-gold-400">ทำนายฝัน & เลขเด็ด</h2>
+        </div>
+        
+        <p className="text-sm text-gray-300 mb-3">พิมพ์ความฝันของคุณ...</p>
+        
+        <textarea 
+          className="w-full bg-black/20 border border-purple-500/30 rounded-xl p-4 text-white focus:outline-none focus:border-gold-500 transition-colors h-32 resize-none text-sm placeholder:text-gray-500"
+          placeholder="เช่น ฝันเห็นงูใหญ่, ฝันว่าฟันหัก..."
+          value={dream}
+          onChange={(e) => setDream(e.target.value)}
+        />
+        
+        <button className="w-full mt-4 bg-gradient-to-r from-purple-700 to-indigo-800 hover:from-purple-600 hover:to-indigo-700 text-white font-medium py-3 rounded-xl shadow-lg shadow-purple-900/50 border border-white/10 transition-all active:scale-95 flex items-center justify-center gap-2">
+          <span>วิเคราะห์เลขเด็ด (Analyze)</span>
+          <span className="text-gold-400">✨</span>
+        </button>
       </div>
 
-      <footer className="text-center text-gray-500 text-xs mt-8">
-        © 2024 SiamLuckyAI. เพื่อความบันเทิงเท่านั้น (For entertainment purposes only).
-      </footer>
+      {/* Horoscope Section */}
+      <section className="relative z-10">
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <span className="text-gold-400 text-xl">⭐</span>
+          <h2 className="text-xl font-bold text-white text-center">ดูดวงรายวัน (Daily Horoscope)</h2>
+          <span className="text-gold-400 text-xl">⭐</span>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3">
+          {zodiacs.map((z, index) => (
+            <div key={index} className="glass-card rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-900/20 opacity-0 hover:opacity-100 transition-opacity"></div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-xl mb-2 shadow-inner border border-white/20">
+                {z.icon}
+              </div>
+              <h3 className="text-xs font-bold text-gray-100">{z.thai}</h3>
+              <p className="text-[10px] text-gray-400 text-center leading-tight mt-1">{z.date}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Share Button (Sticky Bottom) */}
+      <div className="fixed bottom-6 left-0 right-0 px-4 z-50 flex justify-center">
+        <button className="bg-[#06C755] hover:bg-[#05b54d] text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-green-900/50 flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 max-w-sm w-full justify-center">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 12c0-5.2-4-9.5-9-9.5S2.5 6.8 2.5 12c0 2.5 1 4.8 2.6 6.5.3.3.3.7.1 1.1-.3 1.1-1 3.8-1 3.9-.1.3.1.6.4.6 2.3 0 4.6-1.5 5.5-2.1.2-.1.5-.2.8-.1 1.1.4 2.2.6 3.4.6 5 0 9-4.3 9-9.5z"/></svg>
+          Line แชร์ให้เพื่อน
+        </button>
+      </div>
 
     </main>
   );
