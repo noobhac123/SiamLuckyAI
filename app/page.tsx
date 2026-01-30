@@ -1,177 +1,123 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Sparkles, Star, Lock, RefreshCw, Share2 } from 'lucide-react';
-
-// Types
-type Prediction = {
-  luckyNumber: string;
-  luckyColor: string;
-  description: string;
-  zodiac: string;
-};
+import { useState } from 'react';
+import { Sparkles, Gift, Lock, RefreshCw, Share2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Home() {
-  const [name, setName] = useState('');
-  const [birthDate, setBirthDate] = useState('');
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Prediction | null>(null);
+  const [result, setResult] = useState<any>(null);
 
-  // Fake AI Processing logic to simulate "Calculation"
-  const handlePredict = () => {
-    if (!name || !birthDate) return;
-
+  const generateLuck = () => {
     setLoading(true);
-    
-    // Simulate API delay / Ad viewing time
+    // Simulate complex AI calculation + Ad viewing time (3.5s)
     setTimeout(() => {
-      // Mock Data Generation (In real app, this could be more complex)
-      const mockNumbers = Math.floor(10 + Math.random() * 89);
-      const colors = ['สีทอง (Gold)', 'สีแดงมงคล (Red)', 'สีเขียวเหนี่ยวทรัพย์ (Green)', 'สีม่วงมหากาฬ (Purple)'];
-      
       setResult({
-        luckyNumber: `${Math.floor(Math.random() * 9)}${Math.floor(Math.random() * 9)}`,
-        luckyColor: colors[Math.floor(Math.random() * colors.length)],
-        description: "ดวงดาวของคุณกำลังส่องแสง พลังงานบวกกำลังเข้ามา หาจังหวะเสี่ยงโชคในช่วงนี้",
-        zodiac: "มังกรทอง (Golden Dragon)"
+        number: String(Math.floor(Math.random() * 90) + 10),
+        secondary: [Math.floor(Math.random() * 999), Math.floor(Math.random() * 999)],
+        desc: "พลังงานดาวศุกร์เคลื่อนย้าย โชคลาภกำลังมาหาคุณ"
       });
       setLoading(false);
-    }, 3000); // 3 seconds delay for "Ad Exposure" or "Suspense"
+    }, 3500);
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <main className="min-h-screen pt-8 pb-24 px-4 max-w-md mx-auto relative">
       
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-purple-600 rounded-full blur-[100px] opacity-20"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-yellow-500 rounded-full blur-[100px] opacity-20"></div>
+      {/* Header */}
+      <div className="text-center mb-10">
+        <div className="inline-block p-1 rounded-full bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent mb-2 w-full max-w-[200px]"></div>
+        <h1 className="text-4xl font-black text-gold-gradient uppercase tracking-tighter">SIAM AI LOTTO</h1>
+        <p className="text-gray-400 text-sm mt-1">ระบบคำนวณหวยด้วยปัญญาประดิษฐ์</p>
       </div>
 
-      {/* Main Container */}
-      <div className="z-10 w-full max-w-md">
-        
-        {/* Header Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center p-3 bg-black/40 rounded-full border border-yellow-500/30 mb-4 backdrop-blur-md">
-            <Sparkles className="w-6 h-6 text-yellow-400 mr-2 animate-pulse" />
-            <span className="text-yellow-400 font-bold tracking-widest text-sm">SIAM LUCKY AI</span>
-          </div>
-          <h1 className="text-5xl font-extrabold text-gold-gradient mb-2 drop-shadow-lg">
-            เลขเด็ด AI
-          </h1>
-          <p className="text-gray-400 text-lg font-light">
-            ทำนายดวงชะตาด้วยระบบอัจฉริยะ
-          </p>
-        </div>
+      {/* Main Card */}
+      <div className="glass-card p-6 rounded-3xl relative overflow-hidden">
+        {/* Decorative Glow */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 blur-[50px] rounded-full"></div>
 
-        {/* Input Card */}
         {!result ? (
-          <div className="glass-panel p-8 rounded-3xl border-t border-white/10">
-            <div className="space-y-6">
-              <div>
-                <label className="block text-yellow-500 text-sm mb-2 font-semibold">ชื่อของคุณ (Name)</label>
-                <input 
-                  type="text" 
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="กรอกชื่อ..."
-                  className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-yellow-500 focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-yellow-500 text-sm mb-2 font-semibold">วันเกิด (Birth Date)</label>
-                <input 
-                  type="date" 
-                  value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)}
-                  className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-yellow-500 focus:outline-none transition-colors"
-                />
-              </div>
+          <div className="space-y-6 text-center py-4">
+            <div className="w-24 h-24 mx-auto rounded-full bg-black/40 border border-yellow-500/30 flex items-center justify-center relative">
+              <Sparkles className="text-yellow-400 w-10 h-10 animate-pulse" />
+              <div className="absolute inset-0 border-2 border-yellow-500/20 rounded-full animate-ping opacity-20"></div>
+            </div>
+            
+            <div className="space-y-2">
+              <p className="text-lg font-semibold text-white">พร้อมรับโชคหรือยัง?</p>
+              <p className="text-xs text-gray-500">ระบบจะวิเคราะห์ดวงดาวและสถิติย้อนหลัง 10 ปี</p>
+            </div>
 
+            <button 
+              onClick={generateLuck}
+              disabled={loading}
+              className="w-full btn-premium py-4 rounded-xl text-lg shadow-lg flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <span className="animate-pulse">กำลังสวดมนต์... (AI Processing)</span>
+              ) : (
+                <>
+                  <Gift className="w-5 h-5" />
+                  ขอเลขเด็ดงวดนี้ (START)
+                </>
+              )}
+            </button>
+            
+            {/* Ad Space */}
+            <div className="ad-slot h-16 rounded-lg">
+              <span className="text-[10px] text-gray-600">SPONSOR AD (320x50)</span>
+            </div>
+          </div>
+        ) : (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center space-y-6"
+          >
+            <div className="bg-gradient-to-b from-yellow-500/20 to-transparent p-6 rounded-2xl border border-yellow-500/30">
+              <p className="text-yellow-200 text-sm font-medium mb-2">เลขนำโชคของคุณ (Main Number)</p>
+              <h2 className="text-8xl font-black text-gold-gradient drop-shadow-2xl">
+                {result.number}
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                <p className="text-[10px] text-gray-400">เลขรอง (Secondary)</p>
+                <p className="text-xl font-bold text-white">{result.secondary[0]}</p>
+              </div>
+              <div className="bg-white/5 p-3 rounded-xl border border-white/5 relative overflow-hidden group">
+                {/* Viral Lock */}
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center z-10 cursor-pointer">
+                  <Lock className="w-4 h-4 text-yellow-500 mb-1" />
+                  <span className="text-[9px] text-yellow-500">Share to Unlock</span>
+                </div>
+                <p className="text-[10px] text-gray-400">เลขลับ (Secret)</p>
+                <p className="text-xl font-bold text-white blur-sm">999</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-gray-300 italic">"{result.desc}"</p>
+
+            <div className="flex gap-3">
               <button 
-                onClick={handlePredict}
-                disabled={loading || !name || !birthDate}
-                className="w-full btn-gold py-4 rounded-xl text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => setResult(null)}
+                className="flex-1 py-3 rounded-xl bg-white/5 text-white text-sm hover:bg-white/10"
               >
-                {loading ? (
-                  <>
-                    <div className="spinner-gold w-5 h-5 border-2"></div>
-                    กำลังคำนวณ...
-                  </>
-                ) : (
-                  <>
-                    <Star className="w-5 h-5 fill-black" />
-                    ดูเลขเด็ดทันที (Reveal)
-                  </>
-                )}
+                ลองใหม่
+              </button>
+              <button className="flex-1 py-3 rounded-xl btn-premium text-sm flex items-center justify-center gap-2">
+                <Share2 className="w-4 h-4" />
+                แชร์รับโชค
               </button>
             </div>
             
-            <p className="mt-6 text-xs text-center text-gray-500">
-              *AI คำนวณตามหลักโหราศาสตร์สากลและสถิติ (For entertainment only)
-            </p>
-          </div>
-        ) : (
-          /* Result Card - The "Viral" Part */
-          <div className="glass-panel glass-panel-gold p-8 rounded-3xl relative animate-in fade-in zoom-in duration-500">
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-black border border-yellow-500 px-6 py-2 rounded-full shadow-lg shadow-yellow-500/20">
-              <span className="text-yellow-400 font-bold">ผลทำนายของคุณ</span>
+            {/* Native Ad Space */}
+            <div className="ad-slot h-60 rounded-lg">
+               <span className="text-[10px] text-gray-600">NATIVE AD (300x250)</span>
             </div>
-
-            <div className="text-center mt-6 space-y-6">
-              <div>
-                <p className="text-gray-400 text-sm">เลขนำโชค (Lucky Number)</p>
-                <h2 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-yellow-600 drop-shadow-sm mt-2">
-                  {result.luckyNumber}
-                </h2>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 p-3 rounded-xl border border-white/5">
-                  <p className="text-xs text-gray-400 mb-1">สีมงคล</p>
-                  <p className="text-yellow-300 font-medium text-sm">{result.luckyColor}</p>
-                </div>
-                <div className="bg-white/5 p-3 rounded-xl border border-white/5">
-                  <p className="text-xs text-gray-400 mb-1">สัตว์ประจำงวด</p>
-                  <p className="text-yellow-300 font-medium text-sm">{result.zodiac}</p>
-                </div>
-              </div>
-
-              <div className="bg-yellow-500/10 p-4 rounded-xl border border-yellow-500/20">
-                <p className="text-gray-300 text-sm italic">"{result.description}"</p>
-              </div>
-
-              <div className="flex gap-3">
-                 <button 
-                  onClick={() => setResult(null)}
-                  className="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-xl transition-all flex items-center justify-center gap-2"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                  ลองใหม่
-                </button>
-                <button className="flex-1 btn-gold py-3 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
-                  <Share2 className="w-4 h-4" />
-                  แชร์ (Share)
-                </button>
-              </div>
-            </div>
-            
-            {/* Ad Placeholder Bottom */}
-            <div className="mt-6 w-full h-16 bg-black/40 rounded-lg flex items-center justify-center border border-white/5 overflow-hidden">
-               <span className="text-xs text-gray-600">AD SPACE (MONITAG 320x50)</span>
-            </div>
-          </div>
+          </motion.div>
         )}
-
-        {/* Floating Ticker - Social Proof */}
-        <div className="mt-8 bg-black/40 backdrop-blur-sm rounded-full py-2 px-4 border border-white/5 flex items-center gap-3 w-max mx-auto overflow-hidden">
-          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-          <p className="text-xs text-gray-400 whitespace-nowrap">
-            <span className="text-yellow-500 font-bold">Somchai</span> เพิ่งได้รับเลข <span className="text-white">88</span>
-          </p>
-        </div>
-
       </div>
     </main>
   );
