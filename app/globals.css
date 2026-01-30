@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,140 +5,73 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --gold-primary: #D4AF37;
-  --gold-secondary: #F2D06B;
+  --gold-secondary: #FFD700;
+  --dark-bg: #050505;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #0f0c29;
+  background: var(--dark-bg);
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(89, 4, 104, 0.15) 0%, transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(4, 33, 104, 0.15) 0%, transparent 25%),
-    linear-gradient(180deg, #050505 0%, #0a0a1a 100%);
+    radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 25%);
   min-height: 100vh;
-  font-family: 'Sarabun', sans-serif;
-  overflow-x: hidden;
+  font-family: 'Sarabun', sans-serif; /* Thai Friendly Font */
 }
 
-/* Premium Text Effects */
-.text-gold {
+/* Premium Gold Text Gradient */
+.text-gold-gradient {
   background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.3);
+  text-shadow: 0px 2px 10px rgba(212, 175, 55, 0.3);
 }
 
-.text-glow {
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
-/* Glass Card Premium */
-.glass-card {
-  background: rgba(18, 18, 28, 0.6);
+/* Ultra Glass Card */
+.glass-panel {
+  background: rgba(18, 18, 24, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  border-radius: 16px;
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
-.glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-  transition: 0.5s;
+.glass-panel-gold {
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
 }
 
-.glass-card:hover::before {
-  left: 100%;
-}
-
-.glass-card:hover {
-  border-color: rgba(212, 175, 55, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.1);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Input Styling */
-.premium-input {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.premium-input:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-  outline: none;
-}
-
-/* Button Gold */
+/* Magic Button */
 .btn-gold {
-  background: linear-gradient(45deg, #BF953F, #FBF5B7, #AA771C);
+  background: linear-gradient(45deg, #b8860b, #daa520, #ffd700);
+  background-size: 200% auto;
   color: #000;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s ease;
-}
-
-.btn-gold::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #AA771C, #FBF5B7, #BF953F);
-  z-index: -1;
-  transition: opacity 0.3s ease;
-  opacity: 0;
-}
-
-.btn-gold:hover::after {
-  opacity: 1;
+  font-weight: bold;
+  transition: 0.5s;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
 .btn-gold:hover {
+  background-position: right center;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
   transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
-/* Animations */
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* Loading Animation */
+.spinner-gold {
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left-color: #D4AF37;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 10s linear infinite;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--gold-primary);
-}
+/* Thai Font Import (You would typically add this in layout head, using system fallback for now) */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;800&display=swap');
