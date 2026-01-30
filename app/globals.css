@@ -5,73 +5,101 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --gold-primary: #D4AF37;
-  --gold-secondary: #FFD700;
+  --gold-shiny: #FDD835;
   --dark-bg: #050505;
+  --dark-card: #121212;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: var(--dark-bg);
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15) 0%, transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 25%);
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
   min-height: 100vh;
-  font-family: 'Sarabun', sans-serif; /* Thai Friendly Font */
+  padding-bottom: 80px; /* Space for Bottom Nav */
+  font-family: 'Sarabun', sans-serif;
+  overflow-x: hidden;
 }
 
-/* Premium Gold Text Gradient */
+/* Premium Gold Text */
+.text-gold {
+  color: var(--gold-primary);
+}
+
 .text-gold-gradient {
-  background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+  background: linear-gradient(to bottom, #FFD700, #FDB931, #9E7922);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0px 2px 10px rgba(212, 175, 55, 0.3);
+  text-shadow: 0px 4px 12px rgba(253, 216, 53, 0.2);
 }
 
-/* Ultra Glass Card */
-.glass-panel {
-  background: rgba(18, 18, 24, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Glass Card */
+.glass-card {
+  background: rgba(20, 20, 25, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
-.glass-panel-gold {
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+.glass-card-gold {
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
 }
 
-/* Magic Button */
-.btn-gold {
-  background: linear-gradient(45deg, #b8860b, #daa520, #ffd700);
-  background-size: 200% auto;
+/* Buttons */
+.btn-premium {
+  background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
   color: #000;
-  font-weight: bold;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-premium::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   transition: 0.5s;
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
-.btn-gold:hover {
-  background-position: right center;
-  box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-  transform: scale(1.02);
+.btn-premium:hover::after {
+  left: 100%;
 }
 
-/* Loading Animation */
-.spinner-gold {
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-left-color: #D4AF37;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
+.btn-premium:active {
+  transform: scale(0.98);
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Animations */
+@keyframes shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* Thai Font Import (You would typically add this in layout head, using system fallback for now) */
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;800&display=swap');
+.animate-gold-border {
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+  background-size: 200% 100%;
+  animation: shine 2s infinite linear;
+}
+
+/* Monitag Ad Placeholder Styles */
+.ad-slot {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 1rem 0;
+}
