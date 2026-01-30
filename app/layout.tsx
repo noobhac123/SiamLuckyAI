@@ -1,11 +1,9 @@
-import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SiamLuckyAI - Thai Lottery & Dream Prediction",
-  description: "AI-powered lucky number predictions for Thai Lottery (Huy). Interpret your dreams and find your destiny.",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  title: "SiamLuckyAI - ทำนายดวงชะตาและเลขเด็ด AI",
+  description: "AI ทำนายเลขเด็ดและดวงชะตาแม่นๆ สำหรับคนไทย (Thai Lucky Number AI)",
 };
 
 export default function RootLayout({
@@ -14,8 +12,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
+    <html lang="th">
+      <head>
+        {/* Monitag Ad Script Placement */}
+        {/* <script src="//monitag-url..." /> */}
+      </head>
+      <body className="antialiased selection:bg-yellow-500 selection:text-black">
+        {children}
+      </body>
     </html>
   );
 }
